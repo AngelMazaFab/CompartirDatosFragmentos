@@ -22,7 +22,21 @@ public class FragmentA extends Fragment {
     private TextView tvRespuesta;
 
     public FragmentA() {
-        // Required empty public constructor
+        // Constructor público requerido
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Registro de listener para recibir la respuesta que envíe FragmentB
+        getParentFragmentManager().setFragmentResultListener("requestKeyRespuesta", this, (key, bundle) -> {
+            String respuesta = bundle.getString("respuesta", "");
+            if (tvRespuesta != null) {
+                tvRespuesta.setText("Respuesta recibida: " + respuesta);
+                tvRespuesta.setTextAppearance(android.R.style.TextAppearance_Medium);
+            }
+        });
     }
 
     @Override
@@ -30,7 +44,7 @@ public class FragmentA extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_a, container, false);
 
-        // Referencias a los campos de entrada
+        // Referencias a la UI
         etNombre = view.findViewById(R.id.etNombre);
         etEdad = view.findViewById(R.id.etEdad);
         etCorreo = view.findViewById(R.id.etCorreo);
@@ -39,82 +53,72 @@ public class FragmentA extends Fragment {
         tvRespuesta = view.findViewById(R.id.tvRespuesta);
         Button btnNext = view.findViewById(R.id.btnNext);
 
-        // Paso 8: Restaurar datos al rotar el dispositivo
+        // Restaurar datos al rotar la pantalla
         if (savedInstanceState != null) {
             etNombre.setText(savedInstanceState.getString("nombre", ""));
             etEdad.setText(savedInstanceState.getString("edad", ""));
             etCorreo.setText(savedInstanceState.getString("correo", ""));
             etCalificacion.setText(savedInstanceState.getString("calificacion", ""));
             cbSuscrito.setChecked(savedInstanceState.getBoolean("suscrito", false));
+            String savedResp = savedInstanceState.getString("respuesta_recibida", "");
+            if (!savedResp.isEmpty()) {
+                tvRespuesta.setText(savedResp);
+            }
         }
 
-        // Paso 6: Registrar listener para recibir la respuesta de FragmentB
-        getParentFragmentManager().setFragmentResultListener("requestKeyRespuesta", this, (key, bundle) -> {
-            String respuesta = bundle.getString("respuesta");
-            tvRespuesta.setText("Respuesta recibida: " + respuesta);
-        });
+        btnNext.setOnClickListener(v -> {
+            // Lectura y validación de campos
+            String nombre = etNombre.getText().toString().trim();
+            String edadStr = etEdad.getText().toString().trim();
+            String correo = etCorreo.getText().toString().trim();
+            String calificacionStr = etCalificacion.getText().toString().trim();
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Paso 2: Leer y validar los campos
-                String nombre = etNombre.getText().toString().trim();
-                String edadStr = etEdad.getText().toString().trim();
-                String correo = etCorreo.getText().toString().trim();
-                String calificacionStr = etCalificacion.getText().toString().trim();
-
-                // Validar que ningún campo esté vacío
-                if (nombre.isEmpty() || edadStr.isEmpty() || correo.isEmpty() || calificacionStr.isEmpty()) {
-                    Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Validar que la edad sea un número válido
-                int edad;
-                try {
-                    edad = Integer.parseInt(edadStr);
-                } catch (NumberFormatException e) {
-                    Toast.makeText(requireContext(), "Edad no es un número válido", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Validar que la calificación sea un número decimal válido
-                double calificacion;
-                try {
-                    calificacion = Double.parseDouble(calificacionStr);
-                } catch (NumberFormatException e) {
-                    Toast.makeText(requireContext(), "Calificación no es un número válido", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                boolean suscrito = cbSuscrito.isChecked();
-
-                // Paso 3: Construir el Bundle con múltiples tipos de datos
-                FragmentB fragmentB = new FragmentB();
-                Bundle args = new Bundle();
-                args.putString("nombre", nombre);
-                args.putInt("edad", edad);
-                args.putString("correo", correo);
-                args.putDouble("calificacion", calificacion);
-                args.putBoolean("suscrito", suscrito);
-                fragmentB.setArguments(args);
-
-                // Reemplazar FragmentA con FragmentB
-                FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                // Paso 7: Animación entre Fragments
-                transaction.setCustomAnimations(
-                        R.anim.slide_in_right, R.anim.slide_out_left,
-                        R.anim.slide_in_left, R.anim.slide_out_right);
-                transaction.replace(R.id.fragment_container, fragmentB);
-                transaction.addToBackStack(null);
-                transaction.commit();
+            if (nombre.isEmpty() || edadStr.isEmpty() || correo.isEmpty() || calificacionStr.isEmpty()) {
+                Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            int edad;
+            try {
+                edad = Integer.parseInt(edadStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(requireContext(), "Edad no es un número válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            double calificacion;
+            try {
+                calificacion = Double.parseDouble(calificacionStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(requireContext(), "Calificación no es un número válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            boolean suscrito = cbSuscrito.isChecked();
+
+            // Construcción del Bundle con múltiples tipos
+            FragmentB fragmentB = new FragmentB();
+            Bundle args = new Bundle();
+            args.putString("nombre", nombre);
+            args.putInt("edad", edad);
+            args.putString("correo", correo);
+            args.putDouble("calificacion", calificacion);
+            args.putBoolean("suscrito", suscrito);
+            fragmentB.setArguments(args);
+
+            // Reemplazo animado hacia FragmentB
+            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(
+                    R.anim.slide_in_right, R.anim.slide_out_left,
+                    R.anim.slide_in_left, R.anim.slide_out_right);
+            transaction.replace(R.id.fragment_container, fragmentB);
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
 
         return view;
     }
 
-    // Paso 8: Guardar datos al rotar el dispositivo
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -124,6 +128,9 @@ public class FragmentA extends Fragment {
             outState.putString("correo", etCorreo.getText().toString());
             outState.putString("calificacion", etCalificacion.getText().toString());
             outState.putBoolean("suscrito", cbSuscrito.isChecked());
+            if (tvRespuesta != null) {
+                outState.putString("respuesta_recibida", tvRespuesta.getText().toString());
+            }
         }
     }
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".FragmentB">
 
     <LinearLayout
@@ -12,11 +13,30 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fragment B (Intermediario)"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recibe de A, responde a A o añade datos hacia C"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 1. Tarjeta con datos recibidos de Fragment A -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
+            app:cardElevation="4dp"
             android:layout_marginBottom="16dp">
 
             <LinearLayout
@@ -26,72 +46,152 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📥 Datos recibidos de Fragment A:"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
                     android:id="@+id/tvNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+                    android:textSize="15sp"
+                    android:layout_marginBottom="6dp" />
 
                 <TextView
                     android:id="@+id/tvEdad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+                    android:textSize="15sp"
+                    android:layout_marginBottom="6dp" />
 
                 <TextView
                     android:id="@+id/tvCorreo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+                    android:textSize="15sp"
+                    android:layout_marginBottom="6dp" />
 
                 <TextView
                     android:id="@+id/tvCalificacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+                    android:textSize="15sp"
+                    android:layout_marginBottom="6dp" />
 
                 <TextView
                     android:id="@+id/tvSuscrito"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <EditText
-            android:id="@+id/etRespuesta"
+        <!-- 2. Tarjeta para enviar respuesta a Fragment A -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Escribe una respuesta para FragmentA"
-            android:inputType="text"
-            android:layout_marginBottom="8dp" />
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            android:layout_marginBottom="16dp">
 
-        <Button
-            android:id="@+id/btnEnviarRespuesta"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="↩️ Responder a Fragment A:"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/etRespuesta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Escribe una respuesta para FragmentA"
+                    android:inputType="text"
+                    android:layout_marginBottom="10dp" />
+
+                <Button
+                    android:id="@+id/btnEnviarRespuesta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enviar respuesta a Fragment A" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 3. Tarjeta para capturar datos adicionales y enviar a Fragment C -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enviar respuesta a A"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp" />
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            android:layout_marginBottom="16dp">
 
-        <Button
-            android:id="@+id/btnIrC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ver resumen"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="➡️ Campos solicitados en B para Fragment C:"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/etCarrera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Carrera / Especialidad"
+                    android:inputType="text"
+                    android:layout_marginBottom="10dp" />
+
+                <EditText
+                    android:id="@+id/etCiudad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ciudad / Campus"
+                    android:inputType="text"
+                    android:layout_marginBottom="10dp" />
+
+                <EditText
+                    android:id="@+id/etMatricula"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Matrícula / ID de Estudiante"
+                    android:inputType="text"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btnIrC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enviar todo a Fragment C (Ver resumen) ➔" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón para regresar a A -->
         <Button
             android:id="@+id/btnRegresar"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Regresar"
-            android:layout_gravity="center" />
+            android:text="⬅️ Regresar a Fragment A"
+            android:layout_marginBottom="8dp" />
 
     </LinearLayout>
 </ScrollView>
