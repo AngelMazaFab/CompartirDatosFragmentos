@@ -1,5 +1,6 @@
 package com.example.compartirdatosfragmentos;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ public class FragmentA extends Fragment {
     private TextView tvRespuesta;
     private Spinner spinnerPais;
     private ImageView ivAutoSeleccionado;
+    private ImageView ivHeaderBlur;
+    private View viewHeaderOverlay;
     private TextView tvAutoLabel;
     private android.view.View cardAutoContainer;
 
@@ -61,6 +64,8 @@ public class FragmentA extends Fragment {
         ivAutoSeleccionado = view.findViewById(R.id.ivAutoSeleccionado);
         tvAutoLabel        = view.findViewById(R.id.tvAutoLabel);
         cardAutoContainer  = view.findViewById(R.id.cardAutoContainer);
+        ivHeaderBlur       = view.findViewById(R.id.ivHeaderBlur);
+        viewHeaderOverlay  = view.findViewById(R.id.viewHeaderOverlay);
         Button btnNext     = view.findViewById(R.id.btnNext);
 
         // Configurar el Spinner de países
@@ -223,13 +228,44 @@ public class FragmentA extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedPaisIndex = position;
+                actualizarHeaderBlur(position);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 selectedPaisIndex = 0;
+                actualizarHeaderBlur(0);
             }
         });
+    }
+
+    /**
+     * Actualiza la imagen difuminada del header según el país seleccionado.
+     * Si la posición es 0 (hint), oculta la imagen y restablece el color azul marino original.
+     */
+    private void actualizarHeaderBlur(int position) {
+        if (ivHeaderBlur == null) return;
+
+        if (position == 0) {
+            ivHeaderBlur.setVisibility(View.GONE);
+            if (viewHeaderOverlay != null) {
+                viewHeaderOverlay.setAlpha(1.0f);
+            }
+            return;
+        }
+
+        ImageSpinnerAdapter.ImageItem item =
+                (ImageSpinnerAdapter.ImageItem) spinnerPais.getItemAtPosition(position);
+        if (item != null && item.imageResId != 0) {
+            Bitmap blurred = BlurUtils.blurFromResource(requireContext(), item.imageResId, 8f);
+            if (blurred != null) {
+                ivHeaderBlur.setImageBitmap(blurred);
+                ivHeaderBlur.setVisibility(View.VISIBLE);
+                if (viewHeaderOverlay != null) {
+                    viewHeaderOverlay.setAlpha(0.40f);
+                }
+            }
+        }
     }
 
     // Guardar todos los datos al rotar el dispositivo

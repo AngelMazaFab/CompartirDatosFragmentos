@@ -12,56 +12,79 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- ══ CABECERA azul marino ══ -->
-        <LinearLayout
+        <!-- ══ CABECERA azul marino con imagen difuminada ══ -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="16dp">
+            android:background="@color/colorPrimary">
 
+            <!-- Imagen difuminada del país (fondo) -->
+            <ImageView
+                android:id="@+id/ivHeaderBlurB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <!-- Overlay azul marino semi-transparente -->
+            <View
+                android:id="@+id/viewHeaderOverlayB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:alpha="0.40" />
+
+            <!-- Contenido original del header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="10dp">
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_breadcrumb"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="● FRAGMENT B  •  PASO 2"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.05" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 de 2 completado"
+                        android:textColor="#AAAACC"
+                        android:textSize="12sp"
+                        android:layout_marginStart="12dp" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_breadcrumb"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="4dp"
-                    android:text="● FRAGMENT B  •  PASO 2"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:letterSpacing="0.05" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2 de 2 completado"
-                    android:textColor="#AAAACC"
-                    android:textSize="12sp"
-                    android:layout_marginStart="12dp" />
+                    android:text="Detalles del Viaje"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Detalles del Viaje"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+        </FrameLayout>
 
         <!-- ══ CUERPO ══ -->
         <LinearLayout

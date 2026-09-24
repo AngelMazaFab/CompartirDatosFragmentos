@@ -121,6 +121,25 @@ public class FragmentC extends Fragment {
             Toast.makeText(requireContext(), "Error al generar el PDF", Toast.LENGTH_SHORT).show();
         }
 
+        // Difuminar la imagen del país en el header
+        if (paisImageResId != 0) {
+            ImageView ivHeaderBlurC = view.findViewById(R.id.ivHeaderBlurC);
+            View viewHeaderOverlayC = view.findViewById(R.id.viewHeaderOverlayC);
+            Bitmap blurredHeader = BlurUtils.blurFromResource(requireContext(), paisImageResId, 8f);
+            if (blurredHeader != null && ivHeaderBlurC != null) {
+                ivHeaderBlurC.setImageBitmap(blurredHeader);
+                ivHeaderBlurC.setVisibility(View.VISIBLE);
+                if (viewHeaderOverlayC != null) {
+                    viewHeaderOverlayC.setAlpha(0.40f);
+                }
+            }
+        } else {
+            View viewHeaderOverlayC = view.findViewById(R.id.viewHeaderOverlayC);
+            if (viewHeaderOverlayC != null) {
+                viewHeaderOverlayC.setAlpha(1.0f);
+            }
+        }
+
         btnDescargarPdf.setOnClickListener(v -> solicitarPermisoYDescargar());
 
         // Regresar a Fragment A (dos pops)

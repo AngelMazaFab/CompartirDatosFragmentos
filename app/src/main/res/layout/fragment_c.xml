@@ -8,57 +8,93 @@
     android:background="@color/colorBackground"
     tools:context=".FragmentC">
 
-    <!-- ══ CABECERA azul marino ══ -->
-    <LinearLayout
+    <!-- ══ CABECERA azul marino con imagen difuminada ══ -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="16dp">
+        android:background="@color/colorPrimary">
 
-        <LinearLayout
+        <!-- Imagen difuminada del país (fondo) -->
+        <ImageView
+            android:id="@+id/ivHeaderBlurC"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/headerContentC"
+            app:layout_constraintBottom_toBottomOf="@id/headerContentC"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Overlay azul marino semi-transparente -->
+        <View
+            android:id="@+id/viewHeaderOverlayC"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:alpha="0.40"
+            app:layout_constraintTop_toTopOf="@id/headerContentC"
+            app:layout_constraintBottom_toBottomOf="@id/headerContentC"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Contenido original del header -->
+        <LinearLayout
+            android:id="@+id/headerContentC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_breadcrumb"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="3dp"
+                    android:text="📄  PÁG. 1 DE 1"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Voucher PDF"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Badge VALIDADO -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_breadcrumb"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="3dp"
-                android:text="📄  PÁG. 1 DE 1"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="6dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Voucher PDF"
-                android:textColor="@color/white"
-                android:textSize="20sp"
+                android:background="@drawable/bg_badge_active"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:text="✓ VALIDADO"
+                android:textColor="@color/colorBadgeActive"
+                android:textSize="11sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Badge VALIDADO -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_badge_active"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="6dp"
-            android:text="✓ VALIDADO"
-            android:textColor="@color/colorBadgeActive"
-            android:textSize="11sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- ══ VISOR DEL PDF (ocupa todo el espacio central) ══ -->
     <FrameLayout

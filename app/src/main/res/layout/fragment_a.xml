@@ -13,66 +13,89 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- ══ CABECERA azul marino ══ -->
-        <LinearLayout
+        <!-- ══ CABECERA azul marino con imagen difuminada ══ -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="16dp">
+            android:background="@color/colorPrimary">
 
-            <!-- Fila breadcrumb + contador de paso -->
+            <!-- Imagen difuminada del país (fondo) -->
+            <ImageView
+                android:id="@+id/ivHeaderBlur"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <!-- Overlay azul marino semi-transparente -->
+            <View
+                android:id="@+id/viewHeaderOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:alpha="1.0" />
+
+            <!-- Contenido original del header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="12dp">
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="16dp">
 
-                <TextView
-                    android:layout_width="0dp"
+                <!-- Fila breadcrumb + contador de paso -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_breadcrumb"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="4dp"
-                    android:text="● FRAGMENT A  •  REGISTRO &amp; DESTINO"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="10sp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_breadcrumb"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="● FRAGMENT A  •  REGISTRO &amp; DESTINO"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.05" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Paso 1 de 2"
+                        android:textColor="#AAAACC"
+                        android:textSize="12sp"
+                        android:layout_marginStart="12dp" />
+
+                </LinearLayout>
+
+                <!-- Título de la sección -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Datos del Viajero"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
                     android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:letterSpacing="0.05" />
+                    android:layout_marginBottom="4dp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Paso 1 de 2"
+                    android:text="Completa tus datos personales para armar el voucher de viaje"
                     android:textColor="#AAAACC"
-                    android:textSize="12sp"
-                    android:layout_marginStart="12dp" />
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
-            <!-- Título de la sección -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Datos del Viajero"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Completa tus datos personales para armar el voucher de viaje"
-                android:textColor="#AAAACC"
-                android:textSize="13sp" />
-
-        </LinearLayout>
+        </FrameLayout>
 
         <!-- ══ CUERPO del formulario ══ -->
         <LinearLayout

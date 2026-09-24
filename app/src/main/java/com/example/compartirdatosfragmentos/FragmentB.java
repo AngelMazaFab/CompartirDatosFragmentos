@@ -1,5 +1,6 @@
 package com.example.compartirdatosfragmentos;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,8 +92,24 @@ public class FragmentB extends Fragment {
             if (paisImageResId != 0) {
                 ivPaisSeleccionado.setImageResource(paisImageResId);
                 ivPaisSeleccionado.setVisibility(View.VISIBLE);
+
+                // Difuminar la imagen del país en el header
+                ImageView ivHeaderBlurB = view.findViewById(R.id.ivHeaderBlurB);
+                View viewHeaderOverlayB = view.findViewById(R.id.viewHeaderOverlayB);
+                Bitmap blurred = BlurUtils.blurFromResource(requireContext(), paisImageResId, 8f);
+                if (blurred != null && ivHeaderBlurB != null) {
+                    ivHeaderBlurB.setImageBitmap(blurred);
+                    ivHeaderBlurB.setVisibility(View.VISIBLE);
+                    if (viewHeaderOverlayB != null) {
+                        viewHeaderOverlayB.setAlpha(0.40f);
+                    }
+                }
             } else {
                 ivPaisSeleccionado.setVisibility(View.GONE);
+                View viewHeaderOverlayB = view.findViewById(R.id.viewHeaderOverlayB);
+                if (viewHeaderOverlayB != null) {
+                    viewHeaderOverlayB.setAlpha(1.0f);
+                }
             }
         }
 
