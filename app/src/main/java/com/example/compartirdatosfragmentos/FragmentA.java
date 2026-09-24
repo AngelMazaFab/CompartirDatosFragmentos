@@ -28,6 +28,7 @@ public class FragmentA extends Fragment {
     private Spinner spinnerPais;
     private ImageView ivAutoSeleccionado;
     private TextView tvAutoLabel;
+    private android.view.View cardAutoContainer;
 
     // Índice del país seleccionado (0 = hint)
     private int selectedPaisIndex = 0;
@@ -59,6 +60,7 @@ public class FragmentA extends Fragment {
         spinnerPais        = view.findViewById(R.id.spinnerPais);
         ivAutoSeleccionado = view.findViewById(R.id.ivAutoSeleccionado);
         tvAutoLabel        = view.findViewById(R.id.tvAutoLabel);
+        cardAutoContainer  = view.findViewById(R.id.cardAutoContainer);
         Button btnNext     = view.findViewById(R.id.btnNext);
 
         // Configurar el Spinner de países
@@ -94,6 +96,7 @@ public class FragmentA extends Fragment {
                 ivAutoSeleccionado.setImageResource(savedAutoImageResId);
                 ivAutoSeleccionado.setVisibility(View.VISIBLE);
                 tvAutoLabel.setVisibility(View.VISIBLE);
+                if (cardAutoContainer != null) cardAutoContainer.setVisibility(View.VISIBLE);
             }
         }
 
@@ -118,6 +121,7 @@ public class FragmentA extends Fragment {
                 ivAutoSeleccionado.setImageResource(savedAutoImageResId);
                 ivAutoSeleccionado.setVisibility(View.VISIBLE);
                 tvAutoLabel.setVisibility(View.VISIBLE);
+                if (cardAutoContainer != null) cardAutoContainer.setVisibility(View.VISIBLE);
             }
         });
 

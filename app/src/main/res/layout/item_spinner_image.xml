@@ -4,12 +4,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:padding="8dp">
+    android:paddingHorizontal="14dp"
+    android:paddingVertical="10dp">
 
     <ImageView
         android:id="@+id/ivSpinnerItem"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:scaleType="centerCrop"
         android:layout_marginEnd="12dp" />
 
@@ -17,6 +18,8 @@
         android:id="@+id/tvSpinnerItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        android:textSize="15sp"
+        android:textColor="@color/colorTextPrimary"
+        android:textStyle="bold" />
 
 </LinearLayout>

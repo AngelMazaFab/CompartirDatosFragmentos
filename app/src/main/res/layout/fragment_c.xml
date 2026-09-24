@@ -1,79 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBackground"
     tools:context=".FragmentC">
 
-    <!-- Título superior -->
-    <TextView
+    <!-- ══ CABECERA azul marino ══ -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Resumen del Viaje (PDF)"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="12dp" />
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="16dp">
 
-    <!-- Área de visualización del PDF renderizado como imagen -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_breadcrumb"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:text="📄  PÁG. 1 DE 1"
+                android:textColor="@color/colorAccent"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voucher PDF"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Badge VALIDADO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_badge_active"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:text="✓ VALIDADO"
+            android:textColor="@color/colorBadgeActive"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- ══ VISOR DEL PDF (ocupa todo el espacio central) ══ -->
     <FrameLayout
         android:id="@+id/pdfContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp">
 
-        <ScrollView
+        <!-- Sombra/marco tipo documento -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/colorSurface">
 
-            <ImageView
-                android:id="@+id/ivPdfPage"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitStart" />
+                android:layout_height="match_parent">
 
-        </ScrollView>
+                <ImageView
+                    android:id="@+id/ivPdfPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitStart" />
+
+            </ScrollView>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </FrameLayout>
 
-    <!-- Botones de navegación y descarga -->
+    <!-- ══ BOTONES EN LA PARTE INFERIOR ══ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="20dp">
 
-        <!-- Botón Descargar PDF -->
-        <Button
+        <!-- Botón principal: Descargar PDF -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDescargarPdf"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descargar PDF"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="56dp"
+            android:text="⬇  Descargar PDF"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorAccent"
+            app:cornerRadius="28dp"
+            android:layout_marginBottom="10dp" />
 
-        <!-- Botones Regresar -->
+        <!-- Botones secundarios: Regresar a A / Regresar a B -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRegresarAC"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="Regresar a A"
+                android:text="← Regresar a A"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:backgroundTint="@color/colorAccent"
+                app:cornerRadius="24dp"
                 android:layout_marginEnd="8dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRegresarBC"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="Regresar a B"
+                android:text="Regresar a B →"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:backgroundTint="@color/colorAccent"
+                app:cornerRadius="24dp"
                 android:layout_marginStart="8dp" />
 
         </LinearLayout>

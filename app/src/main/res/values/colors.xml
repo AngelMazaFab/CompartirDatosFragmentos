@@ -2,4 +2,34 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta principal Booking Detail -->
+    <color name="colorBackground">#F0F0F8</color>       <!-- Fondo general azul-grisáceo -->
+    <color name="colorSurface">#FFFFFF</color>           <!-- Fondo de tarjetas -->
+    <color name="colorPrimary">#1A1A6E</color>           <!-- Azul marino oscuro (header, CTA) -->
+    <color name="colorPrimaryDark">#12125A</color>       <!-- Azul marino más oscuro -->
+    <color name="colorAccent">#3D5AFE</color>            <!-- Azul brillante (botón CTA) -->
+    <color name="colorAccentLight">#E8EAFD</color>       <!-- Azul muy claro (chips, badge bg) -->
+
+    <!-- Textos -->
+    <color name="colorTextPrimary">#1A1A2E</color>       <!-- Títulos y texto principal -->
+    <color name="colorTextSecondary">#6B6B80</color>     <!-- Subtítulos y texto secundario -->
+    <color name="colorTextLabel">#9E9EAE</color>         <!-- Labels en mayúsculas -->
+    <color name="colorTextOnPrimary">#FFFFFF</color>     <!-- Texto sobre fondo primario -->
+
+    <!-- Estado y badges -->
+    <color name="colorBadgeActive">#00C6AE</color>      <!-- Teal/verde activo -->
+    <color name="colorBadgeActiveBg">#E0FAF6</color>    <!-- Fondo badge activo -->
+    <color name="colorBadgeReceived">#3D5AFE</color>    <!-- Badge "Recibido" -->
+    <color name="colorBadgeReceivedBg">#E8EAFD</color> <!-- Fondo badge recibido -->
+
+    <!-- UI -->
+    <color name="colorDivider">#E2E2EE</color>          <!-- Separadores -->
+    <color name="colorInputBg">#F5F5FB</color>          <!-- Fondo de campos de texto -->
+    <color name="colorInputBorder">#DCDCF0</color>      <!-- Borde de campos -->
+    <color name="colorButtonSecBg">#EEEEF8</color>      <!-- Fondo botones secundarios -->
+    <color name="colorButtonSecText">#3D5AFE</color>    <!-- Texto botones secundarios -->
+    <color name="colorStepText">#9E9EAE</color>         <!-- "Paso 1 de 2" -->
+    <color name="colorSpinnerBg">#FFFFFF</color>         <!-- Fondo spinner -->
+    <color name="colorSpinnerBorder">#DCDCF0</color>    <!-- Borde spinner -->
 </resources>
